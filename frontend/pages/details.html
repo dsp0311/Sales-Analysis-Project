@@ -28,28 +28,28 @@
 
     <form id="detailsForm" class="form-grid">
       <div class="field">
-        <label>Contact Person <span class="req">*</span></label>
-        <input type="text" name="fullName" placeholder="e.g. John Smith" required />
+        <label for="fullName">Contact Person <span class="req">*</span></label>
+        <input type="text" id="fullName" name="fullName" placeholder="e.g. John Smith" required autocomplete="name" />
       </div>
       <div class="field">
-        <label>Email <span class="req">*</span></label>
-        <input type="email" name="email" placeholder="you@business.com" required />
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@business.com" required autocomplete="email" />
       </div>
       <div class="field">
-        <label>Phone Number <span class="req">*</span></label>
-        <input type="tel" name="phone" placeholder="+91 98765 43210" required />
+        <label for="phone">Phone Number <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required autocomplete="tel" />
       </div>
       <div class="field">
-        <label>Tax ID / License</label>
-        <input type="text" name="gst" placeholder="e.g. 29ABCDE1234F1Z5" />
+        <label for="gst">Tax ID / License</label>
+        <input type="text" id="gst" name="gst" placeholder="e.g. 29ABCDE1234F1Z5" autocomplete="off" />
       </div>
       <div class="field">
-        <label>Business name</label>
-        <input type="text" name="businessName" placeholder="Your Business Name" />
+        <label for="businessName">Business Name</label>
+        <input type="text" id="businessName" name="businessName" placeholder="Your Business Name" autocomplete="organization" />
       </div>
       <div class="field">
-        <label>Business Type <span class="req">*</span></label>
-        <select name="category" required>
+        <label for="category">Business Type <span class="req">*</span></label>
+        <select id="category" name="category" required>
           <option value="">Select…</option>
           <option>Retail Store</option>
           <option>Wholesale/Distributor</option>
@@ -59,19 +59,20 @@
         </select>
       </div>
       <div class="field full">
-        <label>Address</label>
-        <textarea name="address" placeholder="Street, city, state, PIN"></textarea>
+        <label for="address">Address</label>
+        <textarea id="address" name="address" placeholder="Street, city, state, PIN" rows="3"></textarea>
       </div>
     </form>
 
     <div class="actions">
       <a href="../index.html" class="btn btn-ghost">← Back</a>
       <button type="submit" form="detailsForm" class="btn btn-primary" id="nextBtn">
-        Save & Continue →
+        <span class="btn-text">Save & Continue</span>
+        <span class="btn-loader" aria-hidden="true"></span>
       </button>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 </body>
 </html>

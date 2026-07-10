@@ -28,23 +28,62 @@
 
     <form id="uploadForm" class="form-grid">
       <!-- Sales Upload -->
-      <div class="field wide">
-        <label>💰 Sales CSV <span class="req">*</span></label>
-        <input type="file" id="salesFile" accept=".csv" />
-        <p class="hint">Upload sales data. Columns: Date, Product, Quantity, Amount</p>
+      <div class="field full">
+        <label for="salesFile">💰 Sales CSV <span class="req">*</span></label>
+        <label class="file-drop-label">
+          <input type="file" id="salesFile" accept=".csv" />
+          <div class="file-drop-zone" data-label="Upload Sales CSV" data-hint="Columns: Date, Product, Quantity, Amount">
+            <span class="file-drop-icon">📤</span>
+            <div class="file-drop-text">
+              <strong>Upload Sales CSV</strong>
+              <span>Drag and drop or click to browse</span>
+            </div>
+          </div>
+          <div class="file-preview" style="display:none;">
+            <div class="file-info">
+              <span class="icon"></span>
+              <div class="details">
+                <span class="name"></span>
+                <span class="meta"></span>
+              </div>
+            </div>
+            <button type="button" class="remove-file" aria-label="Remove file">✕</button>
+          </div>
+        </label>
       </div>
 
       <!-- Purchases Upload -->
-      <div class="field wide">
-        <label>📦 Purchases CSV <span class="req">*</span></label>
-        <input type="file" id="purchasesFile" accept=".csv" />
-        <p class="hint">Upload purchase data. Columns: Date, Product, Quantity, Amount</p>
+      <div class="field full">
+        <label for="purchasesFile">📦 Purchases CSV <span class="req">*</span></label>
+        <label class="file-drop-label">
+          <input type="file" id="purchasesFile" accept=".csv" />
+          <div class="file-drop-zone" data-label="Upload Purchases CSV" data-hint="Columns: Date, Product, Quantity, Amount">
+            <span class="file-drop-icon">📤</span>
+            <div class="file-drop-text">
+              <strong>Upload Purchases CSV</strong>
+              <span>Drag and drop or click to browse</span>
+            </div>
+          </div>
+          <div class="file-preview" style="display:none;">
+            <div class="file-info">
+              <span class="icon"></span>
+              <div class="details">
+                <span class="name"></span>
+                <span class="meta"></span>
+              </div>
+            </div>
+            <button type="button" class="remove-file" aria-label="Remove file">✕</button>
+          </div>
+        </label>
       </div>
     </form>
 
     <div class="actions">
       <a href="details.html" class="btn btn-secondary">← Back</a>
-      <button class="btn btn-primary" id="analyzeBtn">Upload & Analyze 📊</button>
+      <button class="btn btn-primary" id="analyzeBtn">
+        <span class="btn-text">Upload & Analyze 📊</span>
+        <span class="btn-loader spinner" aria-hidden="true" style="display:none;"></span>
+      </button>
     </div>
   </div>
 
