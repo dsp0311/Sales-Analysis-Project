@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. KPI Stats
     const stats = [
-      { label: "Total Revenue", value: `₹${report.total_revenue.toLocaleString()}`, color: "#2b7de9" },
-      { label: "Total Profit", value: `₹${report.total_profit.toLocaleString()}`, color: "#2ecc71" },
-      { label: "Total Cost", value: `₹${report.total_cost.toLocaleString()}`, color: "#e74c3c" },
-      { label: "Best Product", value: report.best_product, color: "#3498db" },
+      { label: "Total Revenue", value: `₹${report.total_revenue.toLocaleString()}`, color: "var(--accent-primary)" },
+      { label: "Total Profit", value: `₹${report.total_profit.toLocaleString()}`, color: "var(--accent-success)" },
+      { label: "Total Cost", value: `₹${report.total_cost.toLocaleString()}`, color: "var(--accent-danger)" },
+      { label: "Best Product", value: report.best_product, color: "var(--accent-primary)" },
     ];
 
     statGrid.innerHTML = stats.map(s => `
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           img.onload = () => { img.style.display = "block"; };
         } else {
           // No data for this chart - hide it and show a message
-          img.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#888;font-size:14px;">No data available</div>';
+          img.parentElement.innerHTML = '<div class="no-data">No data available</div>';
         }
       }
     });
