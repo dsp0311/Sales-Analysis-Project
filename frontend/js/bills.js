@@ -87,7 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const files = e.dataTransfer.files;
       if (files.length > 0) {
-        input.files = files;
+        // Use DataTransfer to assign files (modern approach)
+        try {
+          const dt = new DataTransfer();
+          dt.items.add(files[0]);
+          input.files = dt.files;
+        } catch {
+          // Fallback for older browsers
+          input.files = files;
+        }
         handleFileSelect(input, wrapper);
       }
     });

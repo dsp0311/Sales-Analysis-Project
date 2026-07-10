@@ -156,6 +156,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Allow dark mode printing */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 /* Custom scrollbar */
@@ -413,11 +416,17 @@ body {
   color: var(--fg-secondary);
   text-transform: uppercase;
   letter-spacing: 0.6px;
+  cursor: default;
 }
 
 .field-label .req {
   color: var(--accent-danger);
   margin-left: 2px;
+}
+
+/* Make drop zone clearly clickable */
+.file-drop-zone {
+  cursor: pointer;
 }
 
 .field input,
@@ -1459,6 +1468,8 @@ body {
     color: var(--fg-primary) !important;
     padding: 0;
     margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   /* Respect user's color scheme preference for PDF export */
 
@@ -1478,6 +1489,8 @@ body {
     padding: 20px;
     break-inside: avoid;
     background: var(--bg-secondary) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .card::before { display: none; }
@@ -1487,6 +1500,8 @@ body {
     border: 1px solid var(--border-primary);
     background: var(--bg-tertiary) !important;
     page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .chart-wrap {
@@ -1494,6 +1509,8 @@ body {
     max-height: none !important;
     background: var(--bg-primary) !important;
     border: 1px solid var(--border-primary) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .chart-wrap img {
@@ -1507,6 +1524,8 @@ body {
     border: 1px solid var(--border-primary) !important;
     box-shadow: none !important;
     background: var(--bg-tertiary) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .stat-label { color: var(--fg-secondary) !important; }
@@ -1516,6 +1535,8 @@ body {
     break-inside: avoid;
     border: 1px solid var(--accent-primary) !important;
     background: var(--accent-primary-muted) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .insights-box li::before { color: var(--accent-primary) !important; }
@@ -1524,6 +1545,8 @@ body {
   .data-table {
     background: var(--bg-tertiary) !important;
     border: 1px solid var(--border-primary) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .bill-table th,
@@ -1543,6 +1566,24 @@ body {
     background: transparent !important;
     color: var(--fg-primary) !important;
   }
+
+  a { text-decoration: none; color: var(--accent-primary); }
+
+  .btn { display: none !important; }
+
+  .user-banner {
+    border: 1px solid var(--border-primary) !important;
+    background: var(--bg-tertiary) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .user-avatar {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
 
   a { text-decoration: none; color: var(--accent-primary); }
 
