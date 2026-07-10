@@ -1462,16 +1462,26 @@ body {
 }
 
 /* ===== Print Styles ===== */
+/* Force dark theme - do NOT use CSS variables that respect color-scheme */
 @media print {
+  /* Cover the entire A4 page, including browser print margins */
+  @page {
+    background: #0d1117;
+    margin: 8mm;
+  }
+
+  html {
+    background: #0d1117 !important;
+  }
+
   body {
-    background: var(--bg-primary) !important;
-    color: var(--fg-primary) !important;
+    background: #0d1117 !important;
+    color: #f0f6fc !important;
     padding: 0;
     margin: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-  /* Respect user's color scheme preference for PDF export */
 
   .topbar,
   .stepper,
@@ -1484,11 +1494,11 @@ body {
 
   .card {
     box-shadow: none;
-    border: 1px solid var(--border-primary);
+    border: 1px solid #30363d;
     max-width: 100%;
     padding: 20px;
     break-inside: avoid;
-    background: var(--bg-secondary) !important;
+    background: #161b22 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -1497,8 +1507,8 @@ body {
 
   .chart-box {
     break-inside: avoid;
-    border: 1px solid var(--border-primary);
-    background: var(--bg-tertiary) !important;
+    border: 1px solid #30363d;
+    background: #21262d !important;
     page-break-inside: avoid;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -1507,8 +1517,8 @@ body {
   .chart-wrap {
     height: auto !important;
     max-height: none !important;
-    background: var(--bg-primary) !important;
-    border: 1px solid var(--border-primary) !important;
+    background: #0d1117 !important;
+    border: 1px solid #30363d !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -1521,66 +1531,76 @@ body {
 
   .stat-card {
     break-inside: avoid;
-    border: 1px solid var(--border-primary) !important;
+    border: 1px solid #30363d !important;
     box-shadow: none !important;
-    background: var(--bg-tertiary) !important;
+    background: #21262d !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .stat-label { color: var(--fg-secondary) !important; }
-  .stat-value { color: var(--fg-primary) !important; }
+  .stat-label { color: #8b949e !important; }
+  .stat-value { color: #f0f6fc !important; }
 
   .insights-box {
     break-inside: avoid;
-    border: 1px solid var(--accent-primary) !important;
-    background: var(--accent-primary-muted) !important;
+    border: 1px solid #58a6ff !important;
+    background: rgba(88, 166, 255, 0.15) !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .insights-box li::before { color: var(--accent-primary) !important; }
+  .insights-box li::before { color: #58a6ff !important; }
 
   .bill-table,
   .data-table {
-    background: var(--bg-tertiary) !important;
-    border: 1px solid var(--border-primary) !important;
+    background: #21262d !important;
+    border: 1px solid #30363d !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
   .bill-table th,
   .data-table th {
-    background: var(--bg-secondary) !important;
-    color: var(--fg-secondary) !important;
-    border-color: var(--border-primary) !important;
+    background: #161b22 !important;
+    color: #8b949e !important;
+    border-color: #30363d !important;
   }
 
   .bill-table td,
   .data-table td {
-    border-color: var(--border-primary) !important;
+    border-color: #30363d !important;
   }
 
   .bill-table td input {
     border: none !important;
     background: transparent !important;
-    color: var(--fg-primary) !important;
+    color: #f0f6fc !important;
   }
 
-  a { text-decoration: none; color: var(--accent-primary); }
+  a { text-decoration: none; color: #58a6ff; }
 
   .btn { display: none !important; }
 
   .user-banner {
-    border: 1px solid var(--border-primary) !important;
-    background: var(--bg-tertiary) !important;
+    border: 1px solid #30363d !important;
+    background: #21262d !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .user-avatar {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)) !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  .user-banner .meta h3 { color: #f0f6fc !important; }
+  .user-banner .meta p { color: #8b949e !important; }
+
+  .category-pill {
+    background: rgba(88, 166, 255, 0.15) !important;
+    color: #58a6ff !important;
   }
+
+  h2, h3 { color: #f0f6fc !important; }
+  .sub { color: #8b949e !important; }
+  .chart-box h3 { color: #8b949e !important; }
+
+  /* Force dark on html and universal dark borders */
+  html { background: #0d1117 !important; }
+  * { border-color: #30363d !important; outline-color: #30363d !important; }
 }
