@@ -448,13 +448,20 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Select dropdown arrow */
+/* Select dropdown arrow - hide native arrow completely */
 .field select {
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 40px;
+}
+
+/* Hide native select arrow in IE/Edge Legacy */
+.field select::-ms-expand {
+  display: none;
 }
 
 /* Focus ring for select */
@@ -1438,11 +1445,12 @@ body {
 /* ===== Print Styles ===== */
 @media print {
   body {
-    background: white;
-    color: black;
+    background: var(--bg-primary) !important;
+    color: var(--fg-primary) !important;
     padding: 0;
     margin: 0;
   }
+  /* Respect user's color scheme preference for PDF export */
 
   .topbar,
   .stepper,
@@ -1455,27 +1463,27 @@ body {
 
   .card {
     box-shadow: none;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-primary);
     max-width: 100%;
     padding: 20px;
     break-inside: avoid;
-    background: white !important;
+    background: var(--bg-secondary) !important;
   }
 
   .card::before { display: none; }
 
   .chart-box {
     break-inside: avoid;
-    border: 1px solid #eee;
-    background: white !important;
+    border: 1px solid var(--border-primary);
+    background: var(--bg-tertiary) !important;
     page-break-inside: avoid;
   }
 
   .chart-wrap {
     height: auto !important;
     max-height: none !important;
-    background: white !important;
-    border: 1px solid #eee !important;
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-primary) !important;
   }
 
   .chart-wrap img {
@@ -1486,62 +1494,57 @@ body {
 
   .stat-card {
     break-inside: avoid;
-    border: 1px solid #eee !important;
+    border: 1px solid var(--border-primary) !important;
     box-shadow: none !important;
-    background: white !important;
-    border-top: 3px solid #0969da !important;
+    background: var(--bg-tertiary) !important;
   }
 
-  .stat-card.profit { border-top-color: #1a7f37 !important; }
-  .stat-card.cost { border-top-color: #cf222e !important; }
-  .stat-card.product { border-top-color: #9a6700 !important; }
-
-  .stat-label { color: #6e7781 !important; }
-  .stat-value { color: black !important; }
+  .stat-label { color: var(--fg-secondary) !important; }
+  .stat-value { color: var(--fg-primary) !important; }
 
   .insights-box {
     break-inside: avoid;
-    border: 1px solid #cce5ff !important;
-    background: #f8f9fa !important;
+    border: 1px solid var(--accent-primary) !important;
+    background: var(--accent-primary-muted) !important;
   }
 
-  .insights-box li::before { color: black !important; }
+  .insights-box li::before { color: var(--accent-primary) !important; }
 
   .bill-table,
   .data-table {
-    background: white !important;
-    border: 1px solid #ddd !important;
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-primary) !important;
   }
 
   .bill-table th,
   .data-table th {
-    background: #f6f8fa !important;
-    color: black !important;
-    border-color: #ddd !important;
+    background: var(--bg-secondary) !important;
+    color: var(--fg-secondary) !important;
+    border-color: var(--border-primary) !important;
   }
 
   .bill-table td,
   .data-table td {
-    border-color: #eee !important;
+    border-color: var(--border-primary) !important;
   }
 
   .bill-table td input {
     border: none !important;
     background: transparent !important;
-    color: black !important;
+    color: var(--fg-primary) !important;
   }
 
-  a { text-decoration: none; color: black; }
+  a { text-decoration: none; color: var(--accent-primary); }
 
   .btn { display: none !important; }
 
   .user-banner {
-    border: 1px solid #ddd !important;
-    background: #f6f8fa !important;
+    border: 1px solid var(--border-primary) !important;
+    background: var(--bg-tertiary) !important;
   }
 
   .user-avatar {
-    background: #0969da !important;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)) !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

@@ -52,39 +52,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setupFileDropZone(inputId) {
     const input = document.getElementById(inputId);
-    const label = input.closest("label.file-drop-label");
-    const dropZone = label.querySelector(".file-drop-zone");
-    const filePreview = label.querySelector(".file-preview");
-    const removeBtn = label.querySelector(".remove-file");
+    const wrapper = input.closest(".file-drop-label");
+    const dropZone = wrapper.querySelector(".file-drop-zone");
+    const filePreview = wrapper.querySelector(".file-preview");
+    const removeBtn = wrapper.querySelector(".remove-file");
 
     // Click to open file dialog
-    label.addEventListener("click", (e) => {
-      if (e.target === label || e.target.closest(".file-drop-zone")) {
-        input.click();
-      }
-    });
+    dropZone.addEventListener("click", () => input.click());
 
     // Drag and drop events
-    label.addEventListener("dragenter", (e) => {
+    dropZone.addEventListener("dragenter", (e) => {
       e.preventDefault();
       e.stopPropagation();
       dropZone.classList.add("drag-over");
     });
 
-    label.addEventListener("dragover", (e) => {
+    dropZone.addEventListener("dragover", (e) => {
       e.preventDefault();
       e.stopPropagation();
     });
 
-    label.addEventListener("dragleave", (e) => {
+    dropZone.addEventListener("dragleave", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (!label.contains(e.relatedTarget)) {
+      if (!wrapper.contains(e.relatedTarget)) {
         dropZone.classList.remove("drag-over");
       }
     });
 
-    label.addEventListener("drop", (e) => {
+    dropZone.addEventListener("drop", (e) => {
       e.preventDefault();
       e.stopPropagation();
       dropZone.classList.remove("drag-over");
@@ -92,12 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const files = e.dataTransfer.files;
       if (files.length > 0) {
         input.files = files;
-        handleFileSelect(input, label);
+        handleFileSelect(input, wrapper);
       }
     });
 
     // File input change
-    input.addEventListener("change", () => handleFileSelect(input, label));
+    input.addEventListener("change", () => handleFileSelect(input, wrapper));
 
     // Remove file
     if (removeBtn) {
@@ -105,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         e.stopPropagation();
         input.value = "";
-        updateFilePreview(label, null);
+        updateFilePreview(wrapper, null);
         dropZone.classList.remove("has-file");
       });
     }
