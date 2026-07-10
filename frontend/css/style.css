@@ -1584,19 +1584,3 @@ body {
     print-color-adjust: exact;
   }
 }
-
-  a { text-decoration: none; color: var(--accent-primary); }
-
-  .btn { display: none !important; }
-
-  .user-banner {
-    border: 1px solid var(--border-primary) !important;
-    background: var(--bg-tertiary) !important;
-  }
-
-  .user-avatar {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)) !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}
