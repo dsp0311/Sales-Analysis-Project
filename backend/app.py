@@ -34,7 +34,7 @@ def serve_frontend(path):
 
 @app.route('/api/details', methods=['POST'])
 def save_details():
-    print("✅ Request Received: Saving details...")
+    print("[OK] Request Received: Saving details...")
     data = request.json
     storage["user_details"] = data
     return jsonify({"status": "success", "message": "Details saved"}), 200
