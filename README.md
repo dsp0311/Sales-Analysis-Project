@@ -6,14 +6,14 @@ A web application for analyzing business sales and purchase data. Upload CSV fil
 
 - Upload sales and purchase CSV files
 - Automatic generation of business metrics:
-  - Total Revenue, Profit, Cost
-  - Best/worst selling products
+- Total Revenue, Profit, Cost
+- Best/worst selling products
 - Interactive charts:
-  - Monthly Revenue & Profit Trend
-  - Top Selling Products
-  - Profit/Loss by Product
-  - Revenue Share (Pie chart)
-  - Cost vs Profit breakdown
+- Monthly Revenue & Profit Trend
+- Top Selling Products
+- Profit/Loss by Product
+- Revenue Share (Pie chart)
+- Cost vs Profit breakdown
 - Business insights and recommendations
 - Export data as CSV or JSON
 - Print-friendly reports
@@ -42,28 +42,28 @@ pip install -r requirements.txt
 ```bash
 python backend/app.py
 ```
-   *Server starts on `http://0.0.0.0:5000`*
+*Server starts on `http://0.0.0.0:5000`*
 
 2. **Open your browser** and go to:
-```
+```bash
 http://localhost:5000
 ```
 
 3. **Follow the workflow**:
-   - Step 1: Enter your business details
-   - Step 2: Upload Sales and Purchases CSV files
-   - Step 3: View analysis, charts, and insights
+- Step 1: Enter your business details
+- Step 2: Upload Sales and Purchases CSV files
+- Step 3: View analysis, charts, and insights
 
 ## CSV File Format
 
 Both CSV files must contain these columns (exact names required):
 
-| Column   | Description                    |
+| Column | Description |
 |----------|--------------------------------|
-| Date     | Transaction date (DD/MM/YYYY) |
-| Product  | Product name                   |
-| Quantity | Number of units                |
-| Amount   | Total amount in Rupees (₹)     |
+| Date | Transaction date (DD/MM/YYYY) |
+| Product | Product name |
+| Quantity | Number of units |
+| Amount | Total amount in Rupees (₹) |
 
 **Notes:**
 - Sales CSV: `Amount` represents selling price
@@ -90,24 +90,26 @@ Both CSV files must contain these columns (exact names required):
 ## Project Structure
 
 ```
-Business_Sales_Analysis/
+Sales-Analysis-Project/
 ├── backend/
 │   ├── app.py              # Flask server
 │   └── report_generator.py # Analytics engine
 ├── frontend/
+│   ├── assets/             # Static assets (images, fonts, etc.)
 │   ├── css/
-│   │   └── style.css
+│   │   └── style.css       # Main stylesheet
+│   ├── index.html          # Landing page
 │   ├── js/
-│   │   ├── details.js
-│   │   ├── bills.js
-│   │   └── results.js
+│   │   ├── details.js      # Business details form logic
+│   │   ├── bills.js        # CSV upload logic
+│   │   └── results.js      # Results & charts logic
 │   └── pages/
-│       ├── index.html
-│       ├── details.html
-│       ├── bills.html
-│       └── results.html
-├── requirements.txt
-└── README.md
+│       ├── details.html    # Step 1: Business details
+│       ├── bills.html      # Step 2: Upload CSVs
+│       └── results.html    # Step 3: Analysis results
+├── .gitignore
+├── README.md
+└── requirements.txt
 ```
 
 ## Stopping the Server
