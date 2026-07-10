@@ -27,7 +27,7 @@ A web application for analyzing business sales and purchase data. Upload CSV fil
 
 1. Navigate to the project directory:
 ```bash
-cd "C:\Users\DSP\OneDrive\Desktop\Business_Sales_Analysis"
+cd Business_Sales_Analysis
 ```
 
 2. Install Python dependencies:
