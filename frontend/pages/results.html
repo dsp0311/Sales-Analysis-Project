@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 3 · Analysis</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="../js/results.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">📈</div>
+      <div><h1>Business Sales Bill & Analysis</h1></div>
+    </div>
+    <div class="stepper">
+      <div class="step done"><span class="dot">✓</span><span class="tablet-hide">Details</span></div>
+      <div class="bar"></div>
+      <div class="step done"><span class="dot">✓</span><span class="tablet-hide">Bills</span></div>
+      <div class="bar"></div>
+      <div class="step active"><span class="dot">3</span><span class="tablet-hide">Analysis</span></div>
+    </div>
+  </div>
+
+  <div class="card" id="resultsCard">
+    <div class="user-banner" id="userBanner" style="display:none">
+      <div class="user-avatar" id="userAvatar">U</div>
+      <div class="meta">
+        <h3 id="userName">—</h3>
+        <p id="userSub">—</p>
+        <span class="pill category-pill" id="userCategory"></span>
+      </div>
+    </div>
+
+    <h2>Analysis & insights</h2>
+    <p class="sub">Below are the charts computed from your sales and purchase data.</p>
+
+    <div class="stat-grid" id="statGrid"></div>
+
+    <div class="insights-box" id="insightsBox" style="display:none; margin-bottom: 2rem; padding: 1.5rem; background: #f0f7ff; border-radius: 12px; border-left: 5px solid #2b7de9;">
+      <h3 style="margin-top:0">💡 Business Insights</h3>
+      <ul id="insightsList" style="line-height: 1.6; color: #444;"></ul>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h3>Monthly Revenue & Profit Trend</h3>
+        <div class="chart-wrap"><img id="chart-monthly_trend" src="" alt="Monthly Trend" style="width:100%; height:auto; display:none;"></div>
+      </div>
+      <div class="chart-box">
+        <h3>Top Selling Products</h3>
+        <div class="chart-wrap"><img id="chart-top_products" src="" alt="Top Products" style="width:100%; height:auto; display:none;"></div>
+      </div>
+      <div class="chart-box">
+        <h3>Profit / Loss by Product</h3>
+        <div class="chart-wrap"><img id="chart-profit_by_product" src="" alt="Profit by Product" style="width:100%; height:auto; display:none;"></div>
+      </div>
+      <div class="chart-box">
+        <h3>Revenue Share</h3>
+        <div class="chart-wrap"><img id="chart-revenue_share" src="" alt="Revenue Share" style="width:100%; height:auto; display:none;"></div>
+      </div>
+      <div class="chart-box full">
+        <h3>Revenue Breakdown: Cost vs Profit</h3>
+        <div class="chart-wrap"><img id="chart-cost_vs_profit" src="" alt="Cost vs Profit" style="width:100%; height:auto; display:none;"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="bills.html" class="btn btn-ghost">← Edit bills</a>
+      <button class="btn btn-primary" id="exportCsvBtn">📥 Export CSV (Excel)</button>
+      <button class="btn btn-primary" id="exportJsonBtn">⬇ Export JSON</button>
+      <button class="btn btn-outline" id="printBtn">🖨️ Print Report</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>

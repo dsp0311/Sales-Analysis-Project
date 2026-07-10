@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 1 · Business Details</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/details.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">📈</div>
+      <div><h1>Business Sales Bill & Analysis</h1></div>
+    </div>
+    <div class="stepper">
+      <div class="step active"><span class="dot">1</span><span class="tablet-hide">Details</span></div>
+      <div class="bar"></div>
+      <div class="step"><span class="dot">2</span><span class="tablet-hide">Bills</span></div>
+      <div class="bar"></div>
+      <div class="step"><span class="dot">3</span><span class="tablet-hide">Analysis</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Business Details</h2>
+    <p class="sub">Tell us who you are and about your business. This stays linked to your sales data.</p>
+
+    <form id="detailsForm" class="form-grid">
+      <div class="field">
+        <label>Contact Person <span class="req">*</span></label>
+        <input type="text" name="fullName" placeholder="e.g. John Smith" required />
+      </div>
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" name="email" placeholder="you@business.com" required />
+      </div>
+      <div class="field">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="+91 98765 43210" required />
+      </div>
+      <div class="field">
+        <label>Tax ID / License</label>
+        <input type="text" name="gst" placeholder="e.g. 29ABCDE1234F1Z5" />
+      </div>
+      <div class="field">
+        <label>Business name</label>
+        <input type="text" name="businessName" placeholder="Your Business Name" />
+      </div>
+      <div class="field">
+        <label>Business Type <span class="req">*</span></label>
+        <select name="category" required>
+          <option value="">Select…</option>
+          <option>Retail Store</option>
+          <option>Wholesale/Distributor</option>
+          <option>Service Provider</option>
+          <option>Manufacturing</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Address</label>
+        <textarea name="address" placeholder="Street, city, state, PIN"></textarea>
+      </div>
+    </form>
+
+    <div class="actions">
+      <a href="../index.html" class="btn btn-ghost">← Back</a>
+      <button type="submit" form="detailsForm" class="btn btn-primary" id="nextBtn">
+        Save & Continue →
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 2 · Upload Bills</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/bills.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">📈</div>
+      <div><h1>Business Sales Bill & Analysis</h1></div>
+    </div>
+    <div class="stepper">
+      <div class="step done"><span class="dot">✓</span><span class="tablet-hide">Details</span></div>
+      <div class="bar"></div>
+      <div class="step active"><span class="dot">2</span><span class="tablet-hide">Bills</span></div>
+      <div class="bar"></div>
+      <div class="step"><span class="dot">3</span><span class="tablet-hide">Analysis</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Upload your bills</h2>
+    <p class="sub">Upload your sales and purchase CSVs. Each file should have columns: <strong>Date, Product, Quantity, Amount</strong>. The system will automatically calculate revenue, cost, and profit.</p>
+
+    <form id="uploadForm" class="form-grid">
+      <!-- Sales Upload -->
+      <div class="field wide">
+        <label>💰 Sales CSV <span class="req">*</span></label>
+        <input type="file" id="salesFile" accept=".csv" />
+        <p class="hint">Upload sales data. Columns: Date, Product, Quantity, Amount</p>
+      </div>
+
+      <!-- Purchases Upload -->
+      <div class="field wide">
+        <label>📦 Purchases CSV <span class="req">*</span></label>
+        <input type="file" id="purchasesFile" accept=".csv" />
+        <p class="hint">Upload purchase data. Columns: Date, Product, Quantity, Amount</p>
+      </div>
+    </form>
+
+    <div class="actions">
+      <a href="details.html" class="btn btn-outline">← Back</a>
+      <button class="btn btn-primary" id="analyzeBtn">Upload & Analyze 📊</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>
