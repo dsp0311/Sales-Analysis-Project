@@ -1,5 +1,12 @@
 const API_BASE = "/api";
 
+// Simple HTML escape to prevent XSS when rendering backend data
+function escapeHtml(str) {
+	const div = document.createElement("div");
+	div.textContent = str;
+	return div.innerHTML;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
 	const statGrid = document.getElementById("statGrid");
 	const insightsBox = document.getElementById("insightsBox");
@@ -37,10 +44,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 		// 2. KPI Stats with animation
 		renderStats(report);
 
-		// 3. Insights
+		// 3. Insights — show/hide based on data presence
 		if (report.insights && report.insights.length > 0) {
 			insightsBox.style.display = "block";
-			insightsList.innerHTML = report.insights.map(i => `<li>${i}</li>`).join("");
+			insightsList.innerHTML = report.insights
+				.map(i => `<li>${escapeHtml(i)}</li>`)
+				.join("");
+		} else {
+			insightsBox.style.display = "none";
 		}
 
 		// 4. Render Matplotlib Charts (Base64)
@@ -54,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 		resultsCard.innerHTML = `
 		<div style="text-align:center; padding: 3rem;">
 			<h2>Analysis Not Found</h2>
-			<p>${err.message}</p>
+			<p>${escapeHtml(err.message)}</p>
 			<a href="bills.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Upload Data Now</a>
 		</div>`;
 	}
@@ -156,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				};
 
 				overlay.querySelector("#printProceedBtn").addEventListener("click", proceed);
-				overlay.addEventListener("click", (e) => { if (e.target === overlay) proceed(); });
+				overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.remove(); });
 			});
 		}
 	}

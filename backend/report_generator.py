@@ -1,4 +1,4 @@
-import matplotlib
+﻿import matplotlib
 matplotlib.use("Agg")   # non-GUI backend, required for server/Flask use
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -119,8 +119,6 @@ def generate_report(purchase_df: pd.DataFrame, sales_df: pd.DataFrame) -> dict:
         ax.set_ylabel("Amount")
         ax.legend()
         charts["monthly_trend"] = fig_to_base64(fig)
-    else:
-        charts["monthly_trend"] = None
 
     # 2. Top Selling Products (Bar chart)
     top_products = product_sales.sort_values(ascending=False).head(8)
