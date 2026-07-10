@@ -25,9 +25,10 @@ A web application for analyzing business sales and purchase data. Upload CSV fil
 
 ## Installation
 
-1. Navigate to the project directory:
+1. Clone the repository:
 ```bash
-cd Business_Sales_Analysis
+git clone https://github.com/dsp0311/Sales-Analysis-Project.git
+cd Sales-Analysis-Project
 ```
 
 2. Install Python dependencies:
