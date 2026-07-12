@@ -1,10 +1,32 @@
 const API_BASE = "/api";
+const LS_KEY = "business_report_cache";
 
 // Simple HTML escape to prevent XSS when rendering backend data
 function escapeHtml(str) {
 	const div = document.createElement("div");
 	div.textContent = str;
 	return div.innerHTML;
+}
+
+// Try loading from localStorage if API fails
+function loadFromCache() {
+	const raw = localStorage.getItem(LS_KEY);
+	if (!raw) return null;
+	try {
+		return JSON.parse(raw);
+	} catch {
+		return null;
+	}
+}
+
+// Save report to localStorage for resilience
+function saveToCache(user, report) {
+	const payload = JSON.stringify({ user, report, savedAt: Date.now() });
+	try {
+		localStorage.setItem(LS_KEY, payload);
+	} catch (e) {
+		console.warn("Could not save to localStorage:", e);
+	}
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -19,57 +41,77 @@ document.addEventListener("DOMContentLoaded", async () => {
 	// Show skeleton stats while loading
 	renderSkeletonStats();
 
+	let user, report;
 	try {
 		const response = await fetch(`${API_BASE}/results`);
-		if (!response.ok) throw new Error("No results found. Please upload bills first.");
+		if (!response.ok) throw new Error("API_NOT_FOUND");
 
-		const { user, report } = await response.json();
+		const data = await response.json();
+		user = data.user;
+		report = data.report;
 
-		// 1. User Banner
-		if (user && Object.keys(user).length > 0) {
-			userBanner.style.display = "flex";
-			userName.textContent = user.fullName || "Business";
-			userSub.textContent = user.businessName || "Your Business";
-			const avatarEl = document.getElementById("userAvatar");
-			if (avatarEl) {
-				const name = user.fullName || user.businessName || "";
-				avatarEl.textContent = name.trim().charAt(0).toUpperCase() || "U";
-			}
-			const userCategory = document.getElementById("userCategory");
-			if (userCategory && user.category) {
-				userCategory.textContent = user.category;
-			}
+	} catch (apiErr) {
+		console.warn("API unavailable, checking cache:", apiErr.message);
+
+		const cached = loadFromCache();
+		if (!cached || !cached.report) {
+			renderError(
+				"Session Expired",
+				"The server session has ended (e.g., after printing or page refresh). Your report is no longer held in memory. Use the tab where you first viewed the results to re-print or export directly."
+			);
+			return;
 		}
-
-		// 2. KPI Stats with animation
-		renderStats(report);
-
-		// 3. Insights — show/hide based on data presence
-		if (report.insights && report.insights.length > 0) {
-			insightsBox.style.display = "block";
-			insightsList.innerHTML = report.insights
-				.map(i => `<li>${escapeHtml(i)}</li>`)
-				.join("");
-		} else {
-			insightsBox.style.display = "none";
-		}
-
-		// 4. Render Matplotlib Charts (Base64)
-		renderCharts(report.charts);
-
-		// 5. Setup export buttons
-		setupExports(report, user);
-
-	} catch (err) {
-		console.error(err);
-		resultsCard.innerHTML = `
-		<div style="text-align:center; padding: 3rem;">
-			<h2>Analysis Not Found</h2>
-			<p>${escapeHtml(err.message)}</p>
-			<a href="bills.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Upload Data Now</a>
-		</div>`;
+		user = cached.user;
+		report = cached.report;
 	}
 
+	// Cache for future re-visits
+	saveToCache(user, report);
+
+	// 1. User Banner
+	if (user && Object.keys(user).length > 0) {
+		userBanner.style.display = "flex";
+		userName.textContent = user.fullName || "Business";
+		userSub.textContent = user.businessName || "Your Business";
+		const avatarEl = document.getElementById("userAvatar");
+		if (avatarEl) {
+			const name = user.fullName || user.businessName || "";
+			avatarEl.textContent = name.trim().charAt(0).toUpperCase() || "U";
+		}
+		const userCategory = document.getElementById("userCategory");
+		if (userCategory && user.category) {
+			userCategory.textContent = user.category;
+		}
+	}
+
+	// 2. KPI Stats with animation
+	renderStats(report);
+
+	// 3. Insights
+	if (report.insights && report.insights.length > 0) {
+		insightsBox.style.display = "block";
+		insightsList.innerHTML = report.insights
+			.map(i => `<li>${escapeHtml(i)}</li>`)
+			.join("");
+	} else {
+		insightsBox.style.display = "none";
+	}
+
+	// 4. Render Matplotlib Charts (Base64)
+	renderCharts(report.charts);
+
+	// 5. Setup export buttons
+	setupExports(report, user);
+
+	function renderError(title, message) {
+		resultsCard.innerHTML = `
+		<div style="text-align:center; padding: 3rem;">
+			<h2>${escapeHtml(title)}</h2>
+			<p style="color: #8b949e; margin-top: 0.5rem;">${escapeHtml(message)}</p>
+			<p style="color: #8b949e; margin-top: 0.3rem; font-size: 13px;">Tip: If you still have the previous results tab open, re-print or export from there.</p>
+			<a href="bills.html" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">Upload New Data</a>
+		</div>`;
+	}
 	function renderSkeletonStats() {
 		statGrid.innerHTML = `
 		<div class="stat-card skeleton revenue"><div class="stat-label"></div><div class="stat-value"></div></div>
