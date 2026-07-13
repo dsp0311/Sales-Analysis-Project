@@ -553,6 +553,13 @@ body {
   font-size: 14px;
 }
 
+.file-previews-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 12px;
+}
+
 .file-preview {
   margin-top: 12px;
   padding: 12px 14px;
@@ -623,6 +630,14 @@ body {
 .file-preview .remove-file:hover {
   background: var(--accent-danger-muted);
   color: var(--accent-danger);
+}
+
+/* Container for multiple file previews */
+.file-previews-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 12px;
 }
 
 .file-preview .remove-file:focus-visible {

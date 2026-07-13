@@ -205,7 +205,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 				const proceed = () => {
 					overlay.remove();
-					setTimeout(() => window.print(), 50);
+					// Set a descriptive title so the saved PDF has a meaningful filename
+					const bizName = (user && (user.businessName || user.fullName)) || "Business";
+					const dateStr = new Date().toISOString().split("T")[0];
+					const originalTitle = document.title;
+					document.title = bizName + " - Sales Analysis Report - " + dateStr;
+					setTimeout(() => {
+						window.print();
+						// Restore title after print dialog closes
+						setTimeout(() => { document.title = originalTitle; }, 1000);
+					}, 50);
 				};
 
 				overlay.querySelector("#printProceedBtn").addEventListener("click", proceed);

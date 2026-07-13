@@ -1,90 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 2 · Upload Bills</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <script src="../js/bills.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step 2 · Upload Bills</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/bills.js" defer></script>
 </head>
 <body>
-  <div class="topbar">
-    <div class="brand">
-      <div class="logo">📈</div>
-      <div><h1>Business Sales Bill & Analysis</h1></div>
-    </div>
-    <div class="stepper" data-steps="2">
-      <div class="step done"><span class="dot">✓</span><span class="step-label tablet-hide">Details</span></div>
-      <div class="step active"><span class="dot">2</span><span class="step-label tablet-hide">Bills</span></div>
-      <div class="step"><span class="dot">3</span><span class="step-label tablet-hide">Analysis</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Upload your bills</h2>
-    <p class="sub">Upload your sales and purchase CSVs. Each file should have columns: <strong>Date, Product, Quantity, Amount</strong>. The system will automatically calculate revenue, cost, and profit.</p>
-
-    <form id="uploadForm" class="form-grid">
-      <!-- Sales Upload -->
-      <div class="field full">
-        <div class="field-label" for="salesFile">💰 Sales CSV <span class="req">*</span></div>
-        <div class="file-drop-label">
-          <input type="file" id="salesFile" accept=".csv" />
-          <div class="file-drop-zone" data-label="Upload Sales CSV" data-hint="Columns: Date, Product, Quantity, Amount">
-            <span class="file-drop-icon">📤</span>
-            <div class="file-drop-text">
-              <strong>Upload Sales CSV</strong>
-              <span>Drag and drop or click to browse</span>
-            </div>
-          </div>
-          <div class="file-preview" style="display:none;">
-            <div class="file-info">
-              <span class="icon"></span>
-              <div class="details">
-                <span class="name"></span>
-                <span class="meta"></span>
-              </div>
-            </div>
-            <button type="button" class="remove-file" aria-label="Remove file">✕</button>
-          </div>
+    <div class="topbar">
+        <div class="brand">
+            <div class="logo">📈</div>
+            <div><h1>Business Sales Bill & Analysis</h1></div>
         </div>
-      </div>
-
-      <!-- Purchases Upload -->
-      <div class="field full">
-        <div class="field-label" for="purchasesFile">📦 Purchases CSV <span class="req">*</span></div>
-        <div class="file-drop-label">
-          <input type="file" id="purchasesFile" accept=".csv" />
-          <div class="file-drop-zone" data-label="Upload Purchases CSV" data-hint="Columns: Date, Product, Quantity, Amount">
-            <span class="file-drop-icon">📤</span>
-            <div class="file-drop-text">
-              <strong>Upload Purchases CSV</strong>
-              <span>Drag and drop or click to browse</span>
-            </div>
-          </div>
-          <div class="file-preview" style="display:none;">
-            <div class="file-info">
-              <span class="icon"></span>
-              <div class="details">
-                <span class="name"></span>
-                <span class="meta"></span>
-              </div>
-            </div>
-            <button type="button" class="remove-file" aria-label="Remove file">✕</button>
-          </div>
+        <div class="stepper" data-steps="2">
+            <div class="step done"><span class="dot">✓</span><span class="step-label tablet-hide">Details</span></div>
+            <div class="step active"><span class="dot">2</span><span class="step-label tablet-hide">Bills</span></div>
+            <div class="step"><span class="dot">3</span><span class="step-label tablet-hide">Analysis</span></div>
         </div>
-      </div>
-    </form>
-
-    <div class="actions">
-      <a href="details.html" class="btn btn-secondary">← Back</a>
-      <button class="btn btn-primary" id="analyzeBtn">
-        <span class="btn-text">Upload & Analyze 📊</span>
-        <span class="btn-loader spinner" aria-hidden="true" style="display:none;"></span>
-      </button>
     </div>
-  </div>
 
-  <div class="toast" id="toast"></div>
+    <div class="card">
+        <h2>Upload your bills</h2>
+        <p class="sub">Upload your sales and purchase CSVs. You can select <strong>multiple files at once</strong> (hold Ctrl or Shift). Each file should have columns: <strong>Date, Product, Quantity, Amount</strong>.</p>
+
+        <form id="uploadForm" class="form-grid">
+            <!-- Sales Upload -->
+            <div class="field full">
+                <div class="field-label" for="salesFile">💰 Sales CSV <span class="req">*</span></div>
+                <div class="file-drop-label">
+                    <input type="file" id="salesFile" accept=".csv" multiple />
+                    <div class="file-drop-zone" data-label="Upload Sales CSV" data-hint="Columns: Date, Product, Quantity, Amount">
+                        <span class="file-drop-icon">📤</span>
+                        <div class="file-drop-text">
+                            <strong>Upload Sales CSV</strong>
+                            <span>Drag and drop or click to browse</span>
+                        </div>
+                    </div>
+                    <div class="file-previews-list"></div>
+                </div>
+            </div>
+
+            <!-- Purchases Upload -->
+            <div class="field full">
+                <div class="field-label" for="purchasesFile">📦 Purchases CSV <span class="req">*</span></div>
+                <div class="file-drop-label">
+                    <input type="file" id="purchasesFile" accept=".csv" multiple />
+                    <div class="file-drop-zone" data-label="Upload Purchases CSV" data-hint="Columns: Date, Product, Quantity, Amount">
+                        <span class="file-drop-icon">📤</span>
+                        <div class="file-drop-text">
+                            <strong>Upload Purchases CSV</strong>
+                            <span>Drag and drop or click to browse</span>
+                        </div>
+                    </div>
+                    <div class="file-previews-list"></div>
+                </div>
+            </div>
+        </form>
+
+        <div class="actions">
+            <a href="details.html" class="btn btn-secondary">← Back</a>
+            <button class="btn btn-primary" id="analyzeBtn">
+                <span class="btn-text">Upload & Analyze 📊</span>
+                <span class="btn-loader spinner" aria-hidden="true" style="display:none;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
 </body>
 </html>

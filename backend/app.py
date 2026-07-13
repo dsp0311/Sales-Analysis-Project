@@ -44,11 +44,17 @@ def analyze():
         return jsonify({"status": "error", "message": "Both sales and purchases CSVs are required"}), 400
 
     try:
-        sales_file = request.files['sales']
-        purchases_file = request.files['purchases']
+        sales_files = request.files.getlist('sales')
+        purchases_files = request.files.getlist('purchases')
 
-        sales_df = pd.read_csv(sales_file)
-        purchases_df = pd.read_csv(purchases_file)
+        if not sales_files or not purchases_files:
+            return jsonify({"status": "error", "message": "Both sales and purchases CSVs are required"}), 400
+
+        sales_dfs = [pd.read_csv(f) for f in sales_files]
+        purchases_dfs = [pd.read_csv(f) for f in purchases_files]
+
+        sales_df = pd.concat(sales_dfs, ignore_index=True)
+        purchases_df = pd.concat(purchases_dfs, ignore_index=True)
 
         report = generate_report(purchases_df, sales_df)
         storage["last_report"] = report
